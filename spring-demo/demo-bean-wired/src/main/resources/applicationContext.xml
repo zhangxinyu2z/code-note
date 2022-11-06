@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--==========================DI base on constructor=============================-->
+
+    <!--constructor 1 -->
+    <bean class="com.eltorofuerte.beans.po.People"/>
+
+    <bean class="com.eltorofuerte.beans.po.Heart"/>
+    <bean id="h2" class="com.eltorofuerte.beans.po.Heart"/>
+    <!--constructor 2 -->
+    <bean id="p2" class="com.eltorofuerte.beans.po.People">
+        <constructor-arg name="name" value="El Toro Fuerte"/>
+        <constructor-arg name="age" value="27"/>
+        <constructor-arg name="heart" ref="com.eltorofuerte.beans.po.Heart#0"/>
+        <constructor-arg name="hobbies">
+            <null/>
+        </constructor-arg>
+        <constructor-arg name="loveActress">
+            <list><!--set可以去重，取出无序-->
+                <value>Lin Qinxia</value>
+                <value>Qiu Suzhen</value>
+                <value>Wang Zuxian</value>
+            </list>
+        </constructor-arg>
+        <constructor-arg name="loveStarCode">
+            <map>
+                <entry key="9527" value="Hua An"/>
+                <entry key="007" value="James Bond"/>
+            </map>
+        </constructor-arg>
+        <constructor-arg name="properties">
+            <props>
+                <prop key="driverclass">com.mysql.jdbc.Driver</prop>
+                <prop key="username">root</prop>
+            </props>
+        </constructor-arg>
+    </bean>
+
+    <!-- constructor 3 -->
+    <bean id="p3" class="com.eltorofuerte.beans.po.People">
+        <constructor-arg index="0" value="El Toro Fuerte"/>
+        <constructor-arg index="1" value="27"/>
+    </bean>
+
+    <!-- constructor 4 c命名空间 -->
+    <!-- 如果只有一个属性是引用类型，可以用 c:_-ref=     -->
+    <bean id="p4" class="com.eltorofuerte.beans.po.People" c:name="El Toro Fuerte" c:_1="27" c:_2-ref="com.eltorofuerte.beans.po.Heart#0"/>
+
+    <!--=======================DI base on property setter ========================-->
+
+    <!--属性setter注入-->
+    <bean id="p1_s" class="com.eltorofuerte.beans.po.People">
+        <property name="name" value="El Toro Fuerte"/>
+        <property name="age" value="27"/>
+        <property name="heart" ref="h2"/>
+
+        <!--array-->
+        <property name="hobbies">
+            <list><!--set可以去重，取出无序-->
+                <value>play game</value>
+                <value>read book</value>
+            </list>
+        </property>
+        <!--list-->
+        <property name="loveActress">
+            <list>
+                <value>Lin Qinxia</value>
+                <value>Qiu Suzhen</value>
+                <value>Wang Zuxian</value>
+            </list>
+        </property>
+        <!--map-->
+        <property name="loveStarCode">
+            <map>
+                <entry key="9527" value="Hua An"/>
+                <entry key="007" value="James Bond"/>
+            </map>
+        </property>
+        <!--properties-->
+        <property name="properties">
+            <props>
+                <prop key="driverclass">com.mysql.jdbc.Driver</prop>
+                <prop key="username">root</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--p命名空间-->
+    <bean id="p2_s" class="com.eltorofuerte.beans.po.People" p:hobbies-ref="hobbies" p:name="El Toro Fuerte"/>
+
+    <util:list id="hobbies">
+        <value>play game</value>
+        <value>read book</value>
+    </util:list>
+
+    <!--=======================DI use factory method ========================-->
+
+    <!--Instance Factory-->
+    <bean id="instanceFactory" class="com.eltorofuerte.beans.factory.BeanFactory"/>
+    <bean id="p1_f" factory-bean="instanceFactory" factory-method="getPeople">
+        <property name="name" value="El Toro Fuerte"/>
+        <property name="age" value="27"/>
+    </bean>
+
+    <!--Static Factory-->
+    <bean id="p2_f" class="com.eltorofuerte.beans.factory.BeanFactory" factory-method="getPeopleStatic">
+        <property name="name" value="El Toro Fuerte"/>
+        <property name="age" value="27"/>
+    </bean>
+
+
+    <!--==================引入其他bean的配置==========================-->
+    <import resource="classpath*:cdplayer-config.xml"/>
+
+</beans>
