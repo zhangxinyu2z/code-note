@@ -1,5 +1,3 @@
-<meta charset="utf-8" emacsmode="-*- markdown -*-"><link rel="stylesheet" href="https://casual-effects.com/markdeep/latest/slate.css?">
-
 [toc]
 
 # 理解概念
@@ -413,7 +411,3 @@ public class SpringApplicationBeanAmbiguityTest {
 [^3]:[Spring In Action 4 En](https://www.manning.com/books/spring-in-action-fourth-edition)
 [^copy]:[copy](https://juejin.cn/post/6844903912642707464)
 [^4]:[Spring In Action 4 Zh - Addressing ambiguity in autowiring](https://potoyang.gitbook.io/spring-in-action-v4/di-3-zhang-gao-ji-zhuang-pei/untitled-3)
-
-
-<style class="fallback">body{visibility:hidden}</style><script>markdeepOptions={tocStyle:'long'};</script>
-<!-- Markdeep: --><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js?" charset="utf-8"></script>

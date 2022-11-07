@@ -26,6 +26,16 @@ this is [an example][id]
 [google]:http:google.com
 ```
 
+引用方式
+
+```md
+I get 10 times more traffic from [Google][1] than from [Yahoo][2] or [MSN][3].  
+
+[1]: http://google.com/        "Google" 
+[2]: http://search.yahoo.com/  "Yahoo Search" 
+[3]: http://search.msn.com/    "MSN Search"
+```
+
 ## 内部链接：
 
 锚点 -> 锚点目标 
@@ -42,16 +52,16 @@ this is [an example][id]
 
 ### 定义锚点：
 
-行内式：`[内部链接](#目标 "标题")` 	标题可省略
-参考式：`[参考标识符]: #目标 "标题"`
-方式三：
+* 行内式：`[内部链接](#目标 "标题")` 	
+* 标题可省略参考式：`[参考标识符]: #目标 "标题"`
+* 方式三：
 
 ```md
-
 <a href="#锚点目标：比如id、name、标题等">随意</a>
 
 [任意描述](#锚点目标：比如id、name、标题等)
 ```
+
 方式三：先定义参考式，再通过这种格式定义：`[内容][参考标识符]` 内容和参考标识符一样可以不写：`[内容][]`，进行跳转。
 
 ```md
@@ -70,7 +80,15 @@ this is [an example][id]
 
 # 图片
 
-语法：`![图片名称](/path/to/img.jpg)`
+语法：`![图片名称](/path/to/img.jpg "title")`
+
+引用方式：
+
+```md
+![alt text][id]
+
+[id]: /path/to/img.jpg "Title"
+```
 
 Typora使图片居左的方式：1、鼠标到语法最后，table  2、鼠标到！前，空格
 
@@ -135,6 +153,14 @@ BORDER-BOTTOM:#007979 5px solid；
 
 ```
 
+# 脚注
+
+```md
+这是一个链接到谷歌的[^脚注]。
+
+[^脚注]: http://www.google.com
+```
+
 # 背景色
 
 ```html
@@ -148,4 +174,8 @@ BORDER-BOTTOM:#007979 5px solid；
 
 [md->html online](https://daringfireball.net/projects/markdown/dingus)
 
+[官网文档](https://daringfireball.net/projects/markdown/basics)
+
 [扩展markdown语法和样式](https://casual-effects.com/markdeep/)
+
+[Markdown Editor Online](https://stackedit.io/)
