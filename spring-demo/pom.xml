@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--project是pom的根元素-->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!--指定当前pom的版本-->
     <modelVersion>4.0.0</modelVersion>
 
+    <!--项目或者组织的唯一标识：这里写包名，一般为公司网址的反写+项目名-->
     <groupId>com.eltorofuerte</groupId>
+    <!--这里写模块名，一般为项目名-模块名-->
     <artifactId>spring-demo</artifactId>
-    <packaging>pom</packaging>
+    <!--这里写版本-->
+    <!--第一位大版本，第二位分支版本，第三位小版本
+    snapshot快照
+    alpha内部测试
+    beta公测
+    release稳定
+    ga正式发布
+    -->
     <version>1.0-SNAPSHOT</version>
+    <!--默认是jar,也可以是war、zip；pom，是打包多module模式下，多个模块一起打包用的-->
+    <packaging>pom</packaging>
+    <!--项目描述名 -->
+    <name></name>
+    <!--项目地址 -->
+    <url></url>
+    <!--项目描述 -->
+    <description></description>
+    <developers></developers>
+    <licenses></licenses>
+    <organization></organization>
+
     <modules>
         <module>demo-ioc-mock</module>
         <module>demo-bean-wired</module>
@@ -27,6 +50,7 @@
         </repository>
     </repositories>
 
+    <!--自定义属性标签-->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -45,6 +69,7 @@
         <lombok.version>1.18.24</lombok.version>
     </properties>
 
+    <!-- 依赖管理，定义项目jar依赖版本 -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -125,6 +150,8 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.1</version>
+                    <!--插件中的configuration是否被子pom继承，默认true-->
+                    <inherited>true</inherited>
                     <configuration>
                         <source>1.8</source>
                         <target>1.8</target>
