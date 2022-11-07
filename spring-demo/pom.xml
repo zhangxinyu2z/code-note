@@ -34,6 +34,7 @@
     <modules>
         <module>demo-ioc-mock</module>
         <module>demo-bean-wired</module>
+        <module>demo-spring-utils</module>
     </modules>
 
     <repositories>
