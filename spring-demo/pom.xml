@@ -35,6 +35,7 @@
         <module>demo-ioc-mock</module>
         <module>demo-bean-wired</module>
         <module>demo-spring-utils</module>
+        <module>demo-mybatis-plus</module>
     </modules>
 
     <repositories>
