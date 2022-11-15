@@ -14,13 +14,13 @@ import java.util.Date;
 public class BeanUtilsTest extends TestCase {
 
     /**
-     * 使用Spring的BeanUtils工具转换对象
-     * 1、 数据类型不一致，可能导致异常，比如包装类型可以接收null，无法转成基本数据类型
-     * 2、 字符串数据，未做处理：空格等，也会copy进去
-     * 3、 会copy null数据， 如果做数据库记录更新，先查数据，只能处理指定字段
+     * org.springframework.beans.BeanUtils
+     * 1、 source 属性使用包装类型，target使用primitive => IllegalArgumentException
+     * 2、 String 不会处理空格，null    会被copy到target对象中
+     * 3、 update数据库记录，慎用，最好是，查询原数据，然后使用set修改更新的数据，再update回数据库
      */
     public void testCopy() {
-        OrderDTO orderDTO = new OrderDTO().setId(1L).setUserId(123L).setOrderNo(" 20210518000001 ").setGmtCreated(new Date())
+        OrderDTO orderDTO = new OrderDTO().setId(1L).setUserId(1l).setOrderNo(" 20210518000001 ").setGmtCreated(new Date())
             .setReceivedAmount(null).setRemark("已收金额，前端未传");
 
         OrderVO orderVO = new OrderVO();

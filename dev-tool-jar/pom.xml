@@ -11,6 +11,8 @@
     <modules>
         <module>dev-assertj</module>
         <module>dev-system-rules</module>
+        <module>dev-screenshot-site</module>
+        <module>http-client</module>
     </modules>
 
     <properties>
