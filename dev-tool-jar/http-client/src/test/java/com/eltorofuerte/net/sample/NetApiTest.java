@@ -24,4 +24,10 @@ public class NetApiTest {
 
 
     }
+
+    @Test
+    public void tc() {
+        String s = "8000000192";
+        System.out.println(s.substring(0,2));
+    }
 }
