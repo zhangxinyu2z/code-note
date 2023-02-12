@@ -7,10 +7,10 @@
 
   <import resource="cd-config.xml"/>
 
-  <bean id="cdPlayer" class="com.eltorofuerte.beans.sample.CDPlayer" c:cd-ref="compactDisc" />
-  <bean class="com.eltorofuerte.beans.sample.CDPlayer" c:cd-ref="compactDisc" />
-  <bean id="CdPlayer" class="com.eltorofuerte.beans.sample.CDPlayer" c:cd-ref="compactDisc" />
-  <bean id="cdPlayer2" class="com.eltorofuerte.beans.sample.CDPlayer" c:cd-ref="compactDisc" />
+  <bean id="cdPlayer" class="com.br.zz.beans.sample.CDPlayer" c:cd-ref="compactDisc" />
+  <bean class="com.br.zz.beans.sample.CDPlayer" c:cd-ref="compactDisc" />
+  <bean id="CdPlayer" class="com.br.zz.beans.sample.CDPlayer" c:cd-ref="compactDisc" />
+  <bean id="cdPlayer2" class="com.br.zz.beans.sample.CDPlayer" c:cd-ref="compactDisc" />
 
 
 </beans>

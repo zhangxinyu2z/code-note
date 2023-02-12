@@ -75,21 +75,21 @@ public class People {
 
 ## 构造方法注入
 
-空构造方法：默认id com.eltorofuerte.beans.po.People#0
+空构造方法：默认id People#0
 
 ```xml
-<bean class="com.eltorofuerte.beans.po.People"/>
+<bean class="People"/>
 ```
 
 构造方法name属性注入：
 
 ```xml
-<bean class="com.eltorofuerte.beans.po.Heart"/>
+<bean class="Heart"/>
 <!--constructor 2 -->
-<bean id="p2" class="com.eltorofuerte.beans.po.People">
+<bean id="p2" class="People">
     <constructor-arg name="name" value="El Toro Fuerte"/>
     <constructor-arg name="age" value="27"/>
-    <constructor-arg name="heart" ref="com.eltorofuerte.beans.po.Heart#0"/>
+    <constructor-arg name="heart" ref="Heart#0"/>
     <constructor-arg name="hobbies">
         <null/>
     </constructor-arg>
@@ -119,7 +119,7 @@ public class People {
 
 ```xml
 <!--constructor 3 -->
-<bean id="p3" class="com.eltorofuerte.beans.po.People">
+<bean id="p3" class="People">
     <constructor-arg index="0" value="El Toro Fuerte"/>
     <constructor-arg index="1" value="27"/>
 </bean>
@@ -130,7 +130,7 @@ c命名空间注入：
 ```xml
 <!-- constructor 4 c命名空间 -->
     <!-- 如果只有一个属性是引用类型，可以用 c:_-ref=     -->
-    <bean id="p4" class="com.eltorofuerte.beans.po.People" c:name="El Toro Fuerte" c:_1="27" c:_2-ref="com.eltorofuerte.beans.po.Heart#0"/>
+    <bean id="p4" class="People" c:name="El Toro Fuerte" c:_1="27" c:_2-ref="Heart#0"/>
 ```
 
 ## setter方式注入
@@ -138,7 +138,7 @@ c命名空间注入：
 name属性输入：
 
 ```xml
-<bean id="p1_s" class="com.eltorofuerte.beans.po.People">
+<bean id="p1_s" class="People">
     <property name="name" value="El Toro Fuerte"/>
     <property name="age" value="27"/>
     <property name="heart" ref="h2"/>
@@ -178,7 +178,7 @@ name属性输入：
 p命名标签注入：
 
 ```xml
-<bean id="p2_s" class="com.eltorofuerte.beans.po.People" p:hobbies-ref="hobbies" p:name="El Toro Fuerte"/>
+<bean id="p2_s" class="People" p:hobbies-ref="hobbies" p:name="El Toro Fuerte"/>
 
 <util:list id="hobbies">
     <value>play game</value>
@@ -190,14 +190,14 @@ p命名标签注入：
 
 ```xml
 <!--Instance Factory-->
-<bean id="instanceFactory" class="com.eltorofuerte.beans.factory.BeanFactory"/>
+<bean id="instanceFactory" class="BeanFactory"/>
 <bean id="p1_f" factory-bean="instanceFactory" factory-method="getPeople">
     <property name="name" value="El Toro Fuerte"/>
     <property name="age" value="27"/>
 </bean>
 
 <!--Static Factory-->
-<bean id="p2_f" class="com.eltorofuerte.beans.factory.BeanFactory" factory-method="getPeopleStatic">
+<bean id="p2_f" class="BeanFactory" factory-method="getPeopleStatic">
     <property name="name" value="El Toro Fuerte"/>
     <property name="age" value="27"/>
 </bean>
@@ -312,7 +312,7 @@ cd-config.xml
 
 ```xml
 <bean id="compactDisc"
-    class="com.eltorofuerte.beans.sample.BlankDisc"
+    class="BlankDisc"
     c:_0="Sgt. Pepper's Lonely Hearts Club Band"
     c:_1="The Beatles">
 <constructor-arg>
@@ -332,7 +332,7 @@ cdplayer-config.xml
 
 ```xml
 <import resource="cd-config.xml"/>
-<bean id="cdPlayer" class="com.eltorofuerte.beans.sample.CDPlayer" c:cd-ref="compactDisc" />
+<bean id="cdPlayer" class="CDPlayer" c:cd-ref="compactDisc" />
 ```
 
 SpringApplicationImportConfigTest.java
@@ -363,10 +363,10 @@ cdplayer-config-2.xml
 ```xml
 <import resource="cd-config.xml"/>
 
-<bean id="cdPlayer" class="com.eltorofuerte.beans.sample.CDPlayer" c:cd-ref="compactDisc" />
-<bean class="com.eltorofuerte.beans.sample.CDPlayer" c:cd-ref="compactDisc" />
-<bean id="CdPlayer" class="com.eltorofuerte.beans.sample.CDPlayer" c:cd-ref="compactDisc" />
-<bean id="cdPlayer2" class="com.eltorofuerte.beans.sample.CDPlayer" c:cd-ref="compactDisc" />
+<bean id="cdPlayer" class="CDPlayer" c:cd-ref="compactDisc" />
+<bean class="CDPlayer" c:cd-ref="compactDisc" />
+<bean id="CdPlayer" class="CDPlayer" c:cd-ref="compactDisc" />
+<bean id="cdPlayer2" class="CDPlayer" c:cd-ref="compactDisc" />
 ```
 
 SpringApplicationBeanAmbiguityTest.java
@@ -392,8 +392,8 @@ public class SpringApplicationBeanAmbiguityTest {
 经过测试，applicationContext的beanFactory中的beanDefinitionMap，此时有4个cdPlayer类型的bean，id都不相同，因为id是唯一的，`@AutoWired`是byType注入，有多个相同type的bean，就byName注入，如果是下面这种
 
 ```xml
-<bean id="CdPlayer" class="com.eltorofuerte.beans.sample.CDPlayer" c:cd-ref="compactDisc" />
-<bean id="cdPlayer2" class="com.eltorofuerte.beans.sample.CDPlayer" c:cd-ref="compactDisc" />
+<bean id="CdPlayer" class="CDPlayer" c:cd-ref="compactDisc" />
+<bean id="cdPlayer2" class="CDPlayer" c:cd-ref="compactDisc" />
 ```
 
 此时，Spring就无法区分该注入哪个bean

@@ -1,10 +1,10 @@
-# demo-ioc-mock
+package com.br.zz.ioc.v3;
 
-> 模拟spring ioc容器，项目启动时读取properties文件中的类名通过反射初始化对象，存入Map进行管理
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ResourceBundle;
 
-## BeanFactory
-
-```java
 // 项目启动时，初始化所有的bean到Map容器中，每个类只有一个实例对象
 public class BeanFactory {
     /**
@@ -35,23 +35,3 @@ public class BeanFactory {
         return beans.get(beanName);
     }
 }
-```
-
-## UserService
-
-```java
-public class UserService {
-    private UserDao userDaoImpl = (UserDao)BeanFactory.getBean("UserDaoImpl");
-
-    public void learn() {
-        System.out.println("v3 class type: " + userDaoImpl.getClass());
-        userDaoImpl.learn();
-    }
-}
-```
-
-## bean.properties
-
-```properties
-UserDaoImpl=UserDaoImpl
-```
