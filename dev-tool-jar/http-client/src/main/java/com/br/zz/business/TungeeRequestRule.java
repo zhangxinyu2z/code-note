@@ -1,6 +1,6 @@
-package com.br.zz.helper;
+package com.br.zz.business;
 
-import com.br.zz.util.Md5Util;
+import com.br.zz.util.encrypt.Md5Util;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -10,7 +10,7 @@ import java.util.TreeMap;
  * @author xinyu.zhang
  * @since 2023/2/9 18:55
  */
-public class TungeeRegularHelper {
+public class TungeeRequestRule {
 
     /**
      * 生成签名

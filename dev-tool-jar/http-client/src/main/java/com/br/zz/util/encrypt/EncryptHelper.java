@@ -1,4 +1,4 @@
-package com.br.zz.util;//
+package com.br.zz.util.encrypt;//
 // Source code recreated from a .class file by IntelliJ IDEA
 // (powered by FernFlower decompiler)
 //

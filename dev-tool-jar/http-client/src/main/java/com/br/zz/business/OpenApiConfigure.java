@@ -1,4 +1,4 @@
-package com.br.zz.po;
+package com.br.zz.business;
 
 import lombok.Data;
 

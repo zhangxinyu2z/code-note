@@ -1,4 +1,4 @@
-package com.br.zz.util;
+package com.br.zz.util.encrypt;
 
 public class PasswordMD5Util {
 	/**

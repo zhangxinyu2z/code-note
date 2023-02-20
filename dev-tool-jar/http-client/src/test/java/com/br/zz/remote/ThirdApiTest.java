@@ -3,14 +3,22 @@ package com.br.zz.remote;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.br.zz.helper.DataProcessHelper;
-import com.br.zz.helper.TungeeRegularHelper;
-import com.br.zz.po.OpenApiConfigure;
+import com.br.zz.business.TungeeRequestRule;
+import com.br.zz.business.OpenApiConfigure;
 import com.br.zz.util.UnicodeUtil;
+import com.br.zz.util.http.HttpClientUtil;
+import com.br.zz.util.http.HttpConstant;
 import com.br.zz.util.http.OkHttpClientUtils;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -54,6 +62,35 @@ public class ThirdApiTest {
     }
 
     @Test
+    public void testU() throws IOException {
+        CloseableHttpClient client= HttpClients.createDefault();
+        String url="https://www.baidu.com/";
+        url = "https://www.12306.cn/mormhweb/";
+
+        ook(url, new HashMap<>());
+
+        HttpGet httpGet=new HttpGet(url);
+        //处理响应部分
+        CloseableHttpResponse response =null;
+        try {
+            response = client.execute(httpGet);
+            HttpEntity entity = response.getEntity();
+            System.out.println("获取到的内容："+ EntityUtils.toString(entity,"UTF-8"));
+            EntityUtils.consume(entity);//关闭entity
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally{
+            if (client!=null) {
+                try {client.close();} catch (IOException e) {e.printStackTrace();}
+            }
+            if (response!=null) {
+                try {response.close();} catch (IOException e) {e.printStackTrace();}
+            }
+        }
+
+    }
+
+    @Test
     public void testUrl() {
         String payload = "{\"data\":{\"page\":1,\"limit\":10,\"type\":1,\"customerType\":1,"
             + "\"ssoToken\":\"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
@@ -61,10 +98,12 @@ public class ThirdApiTest {
             ".eyJwc3NfaWQiOiJQUzAwMDAwMDAwMDAwMDAxMTg4NiIsInVzZXJfbmFtZSI6Iis4Ni0xNDIwMDAwMDAwMCIsInNjb3BlIjpbImFsbCJdLCJleHAiOjE2NzYxMDk2MDYsImxvZ2luIjoiU0MxNTAwNTA5MCIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJqdGkiOiI2ZjMxMWFhMy1kMGRkLTQyMjktYWRkYS00ZDA1MzQ2YzBlNTUiLCJjbGllbnRfaWQiOiJzc28ifQ.TOhcbN3jw3Yer4N5BRxRnRec03vn_sX_SqecLO-X4I6VxJ4qTdzPc7BMLKHGJGO4oy1HgQ0_q3BC7pGj5qnImic3HwGmW239Gvb8akb-LnwYqrvor7ZstxmMAM43reQcXrOhGXaVXg7fbdl-4ILZFzMMYep_eyZ5bbqZtO2TW9A\",\"pageSize\":10},\"time\":1676023218891,\"lang\":\"zh\",\"token\":\"C311085575166C2401198096A593874D\"}";
 
         JSONObject jsonObject = JSON.parseObject(payload);
-        String url = "http://micro.tradechina.com/blade-supplier/customer-buyer/customerBuyerBasicInfoList.json";
+        String url = "http://micro.tradechina.com/blade-supplier/customer-buyer/customerBuyerBasicInfoList"
+            + ".json";
 
-
+        String s = HttpClientUtil.doPost(url, payload, null, HttpConstant.APPLICATION_JSON, null);
         //HttpClientUtil.doPost(url, payload, 3, HttpConstant.APPLICATION_JSON, null);
+        System.out.println(s);
     }
 
 
@@ -114,7 +153,7 @@ public class ThirdApiTest {
         }
 
         //签名
-        params.put("signature", TungeeRegularHelper.signature(params, openApiConfigure.getSecretKey()));
+        params.put("signature", TungeeRequestRule.signature(params, openApiConfigure.getSecretKey()));
         // 对keyword encode
         if (params.get("enterprise_names") != null) {
             params.put("enterprise_names", UnicodeUtil.urlEncode(params.get("enterprise_names")));
@@ -123,7 +162,7 @@ public class ThirdApiTest {
             params.put("match_keyword", UnicodeUtil.urlEncode(params.get("match_keyword")));
         }
 
-        String requestUrl = TungeeRegularHelper.getUrl(searchUrl, params);
+        String requestUrl = TungeeRequestRule.getUrl(searchUrl, params);
 
         String resJson;
         resJson = OkHttpClientUtils.get(requestUrl, null);

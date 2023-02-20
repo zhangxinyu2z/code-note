@@ -34,26 +34,6 @@ public class UnicodeUtil {
     }
 
     /**
-     * 对输入的字符串进行URL编码, 即转换为%20这种形式
-     *
-     * httpClients，输入的浏览器地址使用URI.create(uri)，不支持特殊字符%%$
-     *
-     * @param str 原文
-     * @return URL编码. 如果编码失败, 则返回原文
-     */
-    public static String urlEncode(String str) {
-        try {
-            if(str == null) {
-                return null;
-            }
-            return URLEncoder.encode(str, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return str;
-    }
-
-    /**
      * unicode解码 将Unicode的编码转换为中文
      */
     public static String unicodeDecode(String str) {
@@ -69,4 +49,27 @@ public class UnicodeUtil {
         return str;
     }
 
+
+    /**
+     * 对输入的字符串进行URL编码, 即转换为%20这种形式
+     *
+     * httpClients，输入的浏览器地址使用URI.create(uri)，不支持特殊字符%%$
+     *
+     * 请求乱码问题
+     * https://blog.csdn.net/m0_57001006/article/details/125418865
+     *
+     * @param str 原文
+     * @return URL编码. 如果编码失败, 则返回原文
+     */
+    public static String urlEncode(String str) {
+        try {
+            if(str == null) {
+                return null;
+            }
+            return URLEncoder.encode(str, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
 }
