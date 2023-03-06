@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.eltorofuerte</groupId>
+    <groupId>com.wk.xin</groupId>
     <artifactId>dev-tool-jar</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -12,7 +12,8 @@
         <module>dev-assertj</module>
         <module>dev-system-rules</module>
         <module>dev-screenshot-site</module>
-        <module>http-client</module>
+        <module>http-tool</module>
+        <module>xintool</module>
     </modules>
 
     <properties>
@@ -27,6 +28,11 @@
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
         </dependency>
     </dependencies>
 

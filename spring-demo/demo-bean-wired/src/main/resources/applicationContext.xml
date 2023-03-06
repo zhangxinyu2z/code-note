@@ -13,12 +13,12 @@
     <!--==========================DI base on constructor=============================-->
 
     <!--constructor 1 -->
-    <bean class="com.br.zz.beans.po.People"/>
+    <bean class="com.wk.xin.beans.po.People"/>
 
-    <bean class="com.br.zz.beans.po.Heart"/>
-    <bean id="h2" class="com.br.zz.beans.po.Heart"/>
+    <bean class="com.wk.xin.beans.po.Heart"/>
+    <bean id="h2" class="com.wk.xin.beans.po.Heart"/>
     <!--constructor 2 -->
-    <bean id="p2" class="com.br.zz.beans.po.People">
+    <bean id="p2" class="com.wk.xin.beans.po.People">
         <constructor-arg name="name" value="El Toro Fuerte"/>
         <constructor-arg name="age" value="27"/>
         <constructor-arg name="heart" ref="com.eltorofuerte.beans.po.Heart#0"/>
@@ -47,19 +47,19 @@
     </bean>
 
     <!-- constructor 3 -->
-    <bean id="p3" class="com.br.zz.beans.po.People">
+    <bean id="p3" class="com.wk.xin.beans.po.People">
         <constructor-arg index="0" value="El Toro Fuerte"/>
         <constructor-arg index="1" value="27"/>
     </bean>
 
     <!-- constructor 4 c命名空间 -->
     <!-- 如果只有一个属性是引用类型，可以用 c:_-ref=     -->
-    <bean id="p4" class="com.br.zz.beans.po.People" c:name="El Toro Fuerte" c:_1="27" c:_2-ref="com.eltorofuerte.beans.po.Heart#0"/>
+    <bean id="p4" class="com.wk.xin.beans.po.People" c:name="El Toro Fuerte" c:_1="27" c:_2-ref="com.eltorofuerte.beans.po.Heart#0"/>
 
     <!--=======================DI base on property setter ========================-->
 
     <!--属性setter注入-->
-    <bean id="p1_s" class="com.br.zz.beans.po.People">
+    <bean id="p1_s" class="com.wk.xin.beans.po.People">
         <property name="name" value="El Toro Fuerte"/>
         <property name="age" value="27"/>
         <property name="heart" ref="h2"/>
@@ -96,7 +96,7 @@
     </bean>
 
     <!--p命名空间-->
-    <bean id="p2_s" class="com.br.zz.beans.po.People" p:hobbies-ref="hobbies" p:name="El Toro Fuerte"/>
+    <bean id="p2_s" class="com.wk.xin.beans.po.People" p:hobbies-ref="hobbies" p:name="El Toro Fuerte"/>
 
     <util:list id="hobbies">
         <value>play game</value>
@@ -106,14 +106,14 @@
     <!--=======================DI use factory method ========================-->
 
     <!--Instance Factory-->
-    <bean id="instanceFactory" class="com.br.zz.beans.factory.BeanFactory"/>
+    <bean id="instanceFactory" class="com.wk.xin.beans.factory.BeanFactory"/>
     <bean id="p1_f" factory-bean="instanceFactory" factory-method="getPeople">
         <property name="name" value="El Toro Fuerte"/>
         <property name="age" value="27"/>
     </bean>
 
     <!--Static Factory-->
-    <bean id="p2_f" class="com.br.zz.beans.factory.BeanFactory" factory-method="getPeopleStatic">
+    <bean id="p2_f" class="com.wk.xin.beans.factory.BeanFactory" factory-method="getPeopleStatic">
         <property name="name" value="El Toro Fuerte"/>
         <property name="age" value="27"/>
     </bean>
